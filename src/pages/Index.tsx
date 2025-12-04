@@ -1,8 +1,8 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import Footer from "@/components/Footer";
 import BenefitsSection from "@/components/BenefitsSection";
 import PricingSection from "@/components/PricingSection";
-import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
