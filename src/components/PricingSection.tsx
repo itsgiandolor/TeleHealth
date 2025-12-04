@@ -39,9 +39,9 @@ const plans = [
 
 const PricingSection = () => {
   return (
-    <section id="contact" className="py-24 relative overflow-hidden diagonal-lines">
+    <section id="contact" className="min-h-screen flex items-center py-24 relative overflow-hidden diagonal-lines">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background pointer-events-none" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <h2 className="text-3xl lg:text-5xl font-semibold tracking-wide text-foreground text-center mb-20 animate-fade-in">
           CHOOSE THE PLAN THAT FITS YOUR NEEDS
@@ -51,25 +51,24 @@ const PricingSection = () => {
           {plans.map((plan, index) => (
             <div
               key={plan.name}
-              className={`glass-card p-8 flex flex-col animate-fade-in ${
-                plan.highlighted ? "ring-1 ring-accent/50" : ""
-              }`}
+              className={`glass-card p-8 flex flex-col animate-fade-in ${plan.highlighted ? "ring-1 ring-accent/50" : ""
+                }`}
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               <h3 className="text-xl font-semibold tracking-wide text-foreground mb-4">
                 {plan.name}
               </h3>
-              
+
               {plan.price && (
                 <p className="text-muted-foreground text-sm mb-2">{plan.price}</p>
               )}
-              
+
               <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
                 {plan.description}
               </p>
-              
+
               <p className="text-muted-foreground text-sm mb-3">Includes:</p>
-              
+
               <ul className="space-y-2 mb-8 flex-grow">
                 {plan.features.map((feature, featureIndex) => (
                   <li

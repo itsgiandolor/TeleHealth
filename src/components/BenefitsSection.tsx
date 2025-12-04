@@ -18,9 +18,9 @@ const benefits = [
 
 const BenefitsSection = () => {
   return (
-    <section id="about" className="py-24 relative overflow-hidden diagonal-lines">
+    <section id="about" className="min-h-screen flex items-center py-24 relative overflow-hidden diagonal-lines">
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background pointer-events-none" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <h2 className="text-4xl lg:text-5xl font-semibold tracking-wide text-foreground text-center mb-20 animate-fade-in">
           WHY CHOOSE US?
