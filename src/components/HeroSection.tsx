@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import medicalTeam from "@/assets/medical-team.jpg";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -17,9 +18,11 @@ const HeroSection = () => {
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
               Secure online consultations, prescriptions, and digital health records.
             </p>
-            <Button variant="default" size="lg" className="text-lg px-10">
-              Sign in
-            </Button>
+            <Link to="/login">
+              <Button variant="default" size="lg" className="text-lg px-10">
+                Sign in
+              </Button>
+            </Link>
           </div>
 
           {/* Image */}
