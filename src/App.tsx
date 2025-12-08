@@ -4,6 +4,11 @@ import NotFound from "./pages/NotFound";
 import RoleSelection from "./pages/RoleSelection";
 import PatientDashboard from "./pages/PatientDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
+import DoctorSchedulePage from "./pages/DoctorSchedulePage";
+import DoctorPatientsPage from "./pages/DoctorPatientsPage";
+import PatientAppointmentsPage from "./pages/PatientAppointmentsPage";
+import PatientMedicalRecordsPage from "./pages/PatientMedicalRecordsPage";
+import PatientProfilePage from "./pages/PatientProfilePage";
 
 function App() {
   return (
@@ -12,7 +17,12 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<RoleSelection />} />
         <Route path="/dashboard/patient" element={<PatientDashboard />} />
+        <Route path="/patient/appointments" element={<PatientAppointmentsPage />} />
+        <Route path="/patient/records" element={<PatientMedicalRecordsPage />} />
+        <Route path="/patient/profile" element={<PatientProfilePage />} />
         <Route path="/dashboard/doctor" element={<DoctorDashboard />} />
+        <Route path="/doctor/schedule" element={<DoctorSchedulePage />} />
+        <Route path="/doctor/patients" element={<DoctorPatientsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

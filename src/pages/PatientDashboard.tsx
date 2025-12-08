@@ -26,21 +26,29 @@ const PatientDashboard = () => {
                     </Link>
                 </div>
                 <nav className="flex-1 space-y-2 p-4">
-                    <Button variant="secondary" className="w-full justify-start gap-2">
-                        <LayoutDashboard className="h-4 w-4" /> Dashboard
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <Calendar className="h-4 w-4" /> Appointments
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <FileText className="h-4 w-4" /> Medical Records
-                    </Button>
+                    <Link to="/dashboard/patient">
+                        <Button variant="secondary" className="w-full justify-start gap-2">
+                            <LayoutDashboard className="h-4 w-4" /> Dashboard
+                        </Button>
+                    </Link>
+                    <Link to="/patient/appointments">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <Calendar className="h-4 w-4" /> Appointments
+                        </Button>
+                    </Link>
+                    <Link to="/patient/records">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <FileText className="h-4 w-4" /> Medical Records
+                        </Button>
+                    </Link>
                     <Button variant="ghost" className="w-full justify-start gap-2">
                         <MessageSquare className="h-4 w-4" /> Messages
                     </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <User className="h-4 w-4" /> Profile
-                    </Button>
+                    <Link to="/patient/profile">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <User className="h-4 w-4" /> Profile
+                        </Button>
+                    </Link>
                 </nav>
                 <div className="mt-auto p-4">
                     <Button variant="ghost" className="w-full justify-start gap-2">

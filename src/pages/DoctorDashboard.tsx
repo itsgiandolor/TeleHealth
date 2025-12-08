@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Video, FileText, MessageSquare, LogOut, LayoutDashboard, Users, Stethoscope } from "lucide-react";
+import { Clock, Calendar, Video, FileText, MessageSquare, LogOut, LayoutDashboard, Users, Stethoscope } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const DoctorDashboard = () => {
@@ -29,15 +29,21 @@ const DoctorDashboard = () => {
                     </Link>
                 </div>
                 <nav className="flex-1 space-y-2 p-4">
-                    <Button variant="secondary" className="w-full justify-start gap-2">
-                        <LayoutDashboard className="h-4 w-4" /> Dashboard
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <Calendar className="h-4 w-4" /> Schedule
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <Users className="h-4 w-4" /> Patients
-                    </Button>
+                    <Link to="/dashboard/doctor">
+                        <Button variant="secondary" className="w-full justify-start gap-2">
+                            <LayoutDashboard className="h-4 w-4" /> Dashboard
+                        </Button>
+                    </Link>
+                    <Link to="/doctor/schedule">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <Clock className="h-4 w-4" /> Schedule
+                        </Button>
+                    </Link>
+                    <Link to="/doctor/patients">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <Users className="h-4 w-4" /> Patients
+                        </Button>
+                    </Link>
                     <Button variant="ghost" className="w-full justify-start gap-2">
                         <MessageSquare className="h-4 w-4" /> Messages
                     </Button>
