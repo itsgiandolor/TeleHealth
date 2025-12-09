@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Clock, Users, MessageSquare, LogOut, LayoutDashboard, Stethoscope, Search, FilePlus } from "lucide-react";
+import { Clock, Users, MessageSquare, LogOut, LayoutDashboard, Stethoscope, Search, FilePlus, Calendar } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 
@@ -73,22 +73,35 @@ const DoctorPatientsPage = () => {
                             <LayoutDashboard className="h-4 w-4" /> Dashboard
                         </Button>
                     </Link>
-                    <Link to="/doctor/schedule">
-                        <Button variant="ghost" className="w-full justify-start gap-2">
-                            <Clock className="h-4 w-4" /> Schedule
+                    <div className="space-y-1">
+                        <Link to="/doctor/schedule">
+                            <Button variant="ghost" className="w-full justify-start gap-2">
+                                <Clock className="h-4 w-4" /> Schedule
+                            </Button>
+                        </Link>
+                        <Link to="/doctor/appointments">
+                            <Button variant="ghost" className="w-full justify-start gap-2 pl-8">
+                                <Calendar className="h-4 w-4" /> Appointment Requests
+                            </Button>
+                        </Link>
+                    </div>
+                    <Link to="/doctor/patients">
+                        <Button variant="secondary" className="w-full justify-start gap-2">
+                            <Users className="h-4 w-4" /> Patients
                         </Button>
                     </Link>
-                    <Button variant="secondary" className="w-full justify-start gap-2">
-                        <Users className="h-4 w-4" /> Patients
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <MessageSquare className="h-4 w-4" /> Messages
-                    </Button>
+                    <Link to="/doctor/messages">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <MessageSquare className="h-4 w-4" /> Messages
+                        </Button>
+                    </Link>
                 </nav>
                 <div className="mt-auto p-4">
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <LogOut className="h-4 w-4" /> Logout
-                    </Button>
+                    <Link to="/">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <LogOut className="h-4 w-4" /> Logout
+                        </Button>
+                    </Link>
                 </div>
             </aside>
 
@@ -145,8 +158,8 @@ const DoctorPatientsPage = () => {
                                         <TableCell>
                                             <Badge variant={
                                                 patient.status === 'Recovered' ? 'outline' :
-                                                patient.status === 'Stable' ? 'default' :
-                                                'secondary'
+                                                    patient.status === 'Stable' ? 'default' :
+                                                        'secondary'
                                             }>{patient.status}</Badge>
                                         </TableCell>
                                         <TableCell className="text-right">

@@ -59,19 +59,28 @@ const PatientMedicalRecordsPage = () => {
                             <LayoutDashboard className="h-4 w-4" /> Dashboard
                         </Button>
                     </Link>
-                    <Link to="/patient/appointments">
-                        <Button variant="ghost" className="w-full justify-start gap-2">
-                            <Calendar className="h-4 w-4" /> Appointments
-                        </Button>
-                    </Link>
+                    <div className="space-y-1">
+                        <Link to="/patient/appointments">
+                            <Button variant="ghost" className="w-full justify-start gap-2">
+                                <Calendar className="h-4 w-4" /> Appointments
+                            </Button>
+                        </Link>
+                        <Link to="/patient/appointment-requests">
+                            <Button variant="ghost" className="w-full justify-start gap-2 pl-8">
+                                <Calendar className="h-4 w-4" /> Appointment Requests
+                            </Button>
+                        </Link>
+                    </div>
                     <Link to="/patient/records">
                         <Button variant="secondary" className="w-full justify-start gap-2">
                             <FileText className="h-4 w-4" /> Medical Records
                         </Button>
                     </Link>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <MessageSquare className="h-4 w-4" /> Messages
-                    </Button>
+                    <Link to="/patient/messages">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <MessageSquare className="h-4 w-4" /> Messages
+                        </Button>
+                    </Link>
                     <Link to="/patient/profile">
                         <Button variant="ghost" className="w-full justify-start gap-2">
                             <User className="h-4 w-4" /> Profile
@@ -79,9 +88,11 @@ const PatientMedicalRecordsPage = () => {
                     </Link>
                 </nav>
                 <div className="mt-auto p-4">
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <LogOut className="h-4 w-4" /> Logout
-                    </Button>
+                    <Link to="/">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <LogOut className="h-4 w-4" /> Logout
+                        </Button>
+                    </Link>
                 </div>
             </aside>
 

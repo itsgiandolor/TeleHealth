@@ -34,24 +34,35 @@ const DoctorDashboard = () => {
                             <LayoutDashboard className="h-4 w-4" /> Dashboard
                         </Button>
                     </Link>
-                    <Link to="/doctor/schedule">
-                        <Button variant="ghost" className="w-full justify-start gap-2">
-                            <Clock className="h-4 w-4" /> Schedule
-                        </Button>
-                    </Link>
+                    <div className="space-y-1">
+                        <Link to="/doctor/schedule">
+                            <Button variant="ghost" className="w-full justify-start gap-2">
+                                <Clock className="h-4 w-4" /> Schedule
+                            </Button>
+                        </Link>
+                        <Link to="/doctor/appointments">
+                            <Button variant="ghost" className="w-full justify-start gap-2 pl-8">
+                                <Calendar className="h-4 w-4" /> Appointment Requests
+                            </Button>
+                        </Link>
+                    </div>
                     <Link to="/doctor/patients">
                         <Button variant="ghost" className="w-full justify-start gap-2">
                             <Users className="h-4 w-4" /> Patients
                         </Button>
                     </Link>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <MessageSquare className="h-4 w-4" /> Messages
-                    </Button>
+                    <Link to="/doctor/messages">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <MessageSquare className="h-4 w-4" /> Messages
+                        </Button>
+                    </Link>
                 </nav>
                 <div className="mt-auto p-4">
-                    <Button variant="ghost" className="w-full justify-start gap-2">
-                        <LogOut className="h-4 w-4" /> Logout
-                    </Button>
+                    <Link to="/">
+                        <Button variant="ghost" className="w-full justify-start gap-2">
+                            <LogOut className="h-4 w-4" /> Logout
+                        </Button>
+                    </Link>
                 </div>
             </aside>
 
