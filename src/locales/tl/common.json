@@ -1,0 +1,74 @@
+{
+  "navigation": {
+    "dashboard": "Pangunahing Pahina",
+    "schedule": "Iskedyul",
+    "patients": "Mga Pasyente",
+    "appointments": "Mga Appointment",
+    "appointmentRequests": "Mga Kahilingang Appointment",
+    "medicalRecords": "Medikal na Talaan",
+    "profile": "Propesyonal na Impormasyon",
+    "messages": "Mga Mensahe"
+  },
+  "common": {
+    "telemedicine": "Telemedisina",
+    "logout": "Mag-logout",
+    "save": "Magsave",
+    "cancel": "Kanselahin",
+    "delete": "Tanggalin",
+    "edit": "I-edit",
+    "add": "Magdagdag",
+    "back": "Bumalik",
+    "next": "Susunod",
+    "submit": "Ipadala",
+    "loading": "Nag-load...",
+    "error": "Kamalian",
+    "success": "Matagumpay",
+    "warning": "Babala",
+    "search": "Maghanap"
+  },
+  "doctor": {
+    "todayAppointments": "Mga Appointment Ngayong Araw",
+    "upcomingAppointments": "Mga Paparating na Appointment",
+    "noAppointments": "Walang nakaayos na appointment",
+    "viewPatients": "Tingnan ang Mga Pasyente",
+    "scheduleManagement": "Pamamahala ng Iskedyul",
+    "patientList": "Listahan ng Mga Pasyente",
+    "appointmentStatus": "Status ng Appointment",
+    "pendingRequests": "Mga Hinihintay na Kahilingan",
+    "acceptRequest": "Tanggapin",
+    "declineRequest": "Tanggihan",
+    "reschedule": "Ibalik ang Iskedyul"
+  },
+  "patient": {
+    "bookAppointment": "Mag-book ng Appointment",
+    "upcomingAppointments": "Mga Paparating na Appointment",
+    "noAppointments": "Walang paparating na appointment",
+    "selectDate": "Pumili ng Petsa",
+    "selectTime": "Pumili ng Oras",
+    "selectDoctor": "Pumili ng Doktor",
+    "reason": "Dahilan para sa Pagbisita",
+    "requestAppointment": "Humingi ng Appointment",
+    "cancelAppointment": "Kanselahin ang Appointment",
+    "viewRecords": "Tingnan ang Medikal na Talaan",
+    "editProfile": "I-edit ang Propesyonal na Impormasyon"
+  },
+  "form": {
+    "name": "Pangalan",
+    "email": "Email",
+    "phone": "Telepono",
+    "date": "Petsa",
+    "time": "Oras",
+    "status": "Status",
+    "description": "Paglalarawan",
+    "message": "Mensahe",
+    "notes": "Mga Tala"
+  },
+  "status": {
+    "pending": "Hinihintay",
+    "confirmed": "Kumpirmado",
+    "completed": "Tapos na",
+    "cancelled": "Kinansela",
+    "active": "Aktibo",
+    "inactive": "Hindi Aktibo"
+  }
+}

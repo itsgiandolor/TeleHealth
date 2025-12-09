@@ -6,43 +6,45 @@
 
 @layer base {
   :root {
-    --background: 235 45% 5%;
-    --foreground: 0 0% 98%;
+    /* Light mode (default) */
+    --background: 0 0% 100%;
+    --foreground: 235 45% 5%;
 
-    --card: 235 40% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 235 45% 5%;
 
-    --popover: 235 40% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 235 45% 5%;
 
-    --primary: 0 0% 100%;
-    --primary-foreground: 235 45% 5%;
+    --primary: 235 45% 5%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 235 35% 12%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 235 35% 88%;
+    --secondary-foreground: 235 45% 5%;
 
-    --muted: 235 30% 15%;
-    --muted-foreground: 235 10% 60%;
+    --muted: 235 30% 85%;
+    --muted-foreground: 235 10% 40%;
 
     --accent: 220 60% 50%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 235 30% 18%;
-    --input: 235 30% 18%;
+    --border: 235 30% 92%;
+    --input: 235 30% 95%;
     --ring: 220 60% 50%;
 
     --radius: 1rem;
 
     /* Custom design tokens */
-    --gradient-diagonal: linear-gradient(135deg, hsl(235 30% 15% / 0.5) 0%, transparent 50%);
+    --gradient-diagonal: linear-gradient(135deg, hsl(235 30% 85% / 0.5) 0%, transparent 50%);
     --card-glow: 0 0 60px hsl(220 60% 50% / 0.1);
-    --line-color: hsl(235 30% 20%);
+    --line-color: hsl(235 30% 90%);
   }
 
   .dark {
+    /* Dark mode */
     --background: 235 45% 5%;
     --foreground: 0 0% 98%;
 
@@ -89,7 +91,7 @@
 
 @layer utilities {
   .diagonal-lines {
-    background-image: 
+    background-image:
       linear-gradient(135deg, var(--line-color) 1px, transparent 1px);
     background-size: 80px 80px;
   }

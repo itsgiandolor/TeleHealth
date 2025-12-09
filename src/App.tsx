@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import RoleSelection from "./pages/RoleSelection";
@@ -16,25 +17,27 @@ import PatientAppointmentRequests from "./pages/PatientAppointmentRequests";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/login" element={<RoleSelection />} />
-        <Route path="/dashboard/patient" element={<PatientDashboard />} />
-        <Route path="/patient/appointments" element={<PatientAppointmentsPage />} />
-        <Route path="/patient/appointment-requests" element={<PatientAppointmentRequests />} />
-        <Route path="/patient/records" element={<PatientMedicalRecordsPage />} />
-        <Route path="/patient/messages" element={<PatientMessagesPage />} />
-        <Route path="/patient/profile" element={<PatientProfilePage />} />
-        
-        <Route path="/dashboard/doctor" element={<DoctorDashboard />} />
-        <Route path="/doctor/schedule" element={<DoctorSchedulePage />} />
-        <Route path="/doctor/patients" element={<DoctorPatientsPage />} />
-        <Route path="/doctor/messages" element={<DoctorMessagesPage />} />
-        <Route path="/doctor/appointments" element={<DoctorAppointmentRequests />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/login" element={<RoleSelection />} />
+          <Route path="/dashboard/patient" element={<PatientDashboard />} />
+          <Route path="/patient/appointments" element={<PatientAppointmentsPage />} />
+          <Route path="/patient/appointment-requests" element={<PatientAppointmentRequests />} />
+          <Route path="/patient/records" element={<PatientMedicalRecordsPage />} />
+          <Route path="/patient/messages" element={<PatientMessagesPage />} />
+          <Route path="/patient/profile" element={<PatientProfilePage />} />
+
+          <Route path="/dashboard/doctor" element={<DoctorDashboard />} />
+          <Route path="/doctor/schedule" element={<DoctorSchedulePage />} />
+          <Route path="/doctor/patients" element={<DoctorPatientsPage />} />
+          <Route path="/doctor/messages" element={<DoctorMessagesPage />} />
+          <Route path="/doctor/appointments" element={<DoctorAppointmentRequests />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 

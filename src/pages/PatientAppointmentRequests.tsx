@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Calendar, Video, FileText, MessageSquare, LogOut, LayoutDashboard, User, Stethoscope, Check, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import {
     Dialog,
     DialogContent,
@@ -196,11 +198,15 @@ const PatientAppointmentRequests = () => {
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
             <aside className="hidden w-64 flex-col border-r bg-background sm:flex">
-                <div className="flex h-16 items-center border-b px-6">
+                <div className="flex h-16 items-center justify-between border-b px-6">
                     <Link to="/" className="flex items-center gap-2 font-semibold">
                         <Stethoscope className="h-6 w-6 text-primary" />
                         <span>Telemedicine</span>
                     </Link>
+                    <div className="flex gap-2">
+                        <LanguageSelector />
+                        <ThemeToggle />
+                    </div>
                 </div>
                 <nav className="flex-1 space-y-2 p-4">
                     <Link to="/dashboard/patient">

@@ -1,0 +1,74 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "schedule": "Schedule",
+    "patients": "Patients",
+    "appointments": "Appointments",
+    "appointmentRequests": "Appointment Requests",
+    "medicalRecords": "Medical Records",
+    "profile": "Profile",
+    "messages": "Messages"
+  },
+  "common": {
+    "telemedicine": "Telemedicine",
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "search": "Search"
+  },
+  "doctor": {
+    "todayAppointments": "Today's Appointments",
+    "upcomingAppointments": "Upcoming Appointments",
+    "noAppointments": "No appointments scheduled",
+    "viewPatients": "View Patients",
+    "scheduleManagement": "Schedule Management",
+    "patientList": "Patient List",
+    "appointmentStatus": "Appointment Status",
+    "pendingRequests": "Pending Requests",
+    "acceptRequest": "Accept",
+    "declineRequest": "Decline",
+    "reschedule": "Reschedule"
+  },
+  "patient": {
+    "bookAppointment": "Book Appointment",
+    "upcomingAppointments": "Upcoming Appointments",
+    "noAppointments": "No upcoming appointments",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "selectDoctor": "Select Doctor",
+    "reason": "Reason for Visit",
+    "requestAppointment": "Request Appointment",
+    "cancelAppointment": "Cancel Appointment",
+    "viewRecords": "View Medical Records",
+    "editProfile": "Edit Profile"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "date": "Date",
+    "time": "Time",
+    "status": "Status",
+    "description": "Description",
+    "message": "Message",
+    "notes": "Notes"
+  },
+  "status": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "active": "Active",
+    "inactive": "Inactive"
+  }
+}
