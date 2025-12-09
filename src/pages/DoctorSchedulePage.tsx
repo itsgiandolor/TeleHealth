@@ -40,6 +40,17 @@ const appointmentSchema = z.object({
     status: z.enum(["Confirmed", "Completed", "Cancelled", "Rescheduled"]),
 });
 
+type AppointmentType = {
+    date: string;
+    time: string;
+    patient: string;
+    avatar: string;
+    reason: string;
+    status: string;
+};
+
+type AppointmentFormData = z.infer<typeof appointmentSchema> & { avatar: string };
+
 const appointments = [
     {
         date: "2025-12-08",
@@ -70,16 +81,24 @@ const appointments = [
 
 const DoctorSchedulePage = () => {
     const [date, setDate] = React.useState<Date | undefined>(new Date("2025-12-08"))
-    const [appointmentList, setAppointmentList] = React.useState(appointments);
+    const [appointmentList, setAppointmentList] = React.useState<AppointmentType[]>(appointments);
 
     const filteredAppointments = appointmentList.filter(a => date && format(date, "yyyy-MM-dd") === a.date);
 
     const upcomingAppointments = filteredAppointments.filter(a => a.status === "Confirmed" || a.status === "Rescheduled");
     const completedAppointments = filteredAppointments.filter(a => a.status === "Completed");
     const cancelledAppointments = filteredAppointments.filter(a => a.status === "Cancelled");
-    
+
     const addAppointment = (data: z.infer<typeof appointmentSchema>) => {
-        setAppointmentList(prev => [...prev, { ...data, avatar: `https://i.pravatar.cc/40?u=${data.patient}` }]);
+        const newAppointment: AppointmentType = {
+            date: data.date,
+            time: data.time,
+            patient: data.patient,
+            avatar: `https://i.pravatar.cc/40?u=${data.patient}`,
+            reason: data.reason,
+            status: data.status
+        };
+        setAppointmentList(prev => [...prev, newAppointment]);
         toast.success("Appointment created successfully!");
     };
 
@@ -100,22 +119,35 @@ const DoctorSchedulePage = () => {
                                 <LayoutDashboard className="h-4 w-4" /> Dashboard
                             </Button>
                         </Link>
-                        <Button variant="secondary" className="w-full justify-start gap-2">
-                            <Clock className="h-4 w-4" /> Schedule
-                        </Button>
+                        <div className="space-y-1">
+                            <Link to="/doctor/schedule">
+                                <Button variant="secondary" className="w-full justify-start gap-2">
+                                    <Clock className="h-4 w-4" /> Schedule
+                                </Button>
+                            </Link>
+                            <Link to="/doctor/appointments">
+                                <Button variant="ghost" className="w-full justify-start gap-2 pl-8">
+                                    <Calendar className="h-4 w-4" /> Appointment Requests
+                                </Button>
+                            </Link>
+                        </div>
                         <Link to="/doctor/patients">
                             <Button variant="ghost" className="w-full justify-start gap-2">
                                 <Users className="h-4 w-4" /> Patients
                             </Button>
                         </Link>
-                        <Button variant="ghost" className="w-full justify-start gap-2">
-                            <MessageSquare className="h-4 w-4" /> Messages
-                        </Button>
+                        <Link to="/doctor/messages">
+                            <Button variant="ghost" className="w-full justify-start gap-2">
+                                <MessageSquare className="h-4 w-4" /> Messages
+                            </Button>
+                        </Link>
                     </nav>
                     <div className="mt-auto p-4">
-                        <Button variant="ghost" className="w-full justify-start gap-2">
-                            <LogOut className="h-4 w-4" /> Logout
-                        </Button>
+                        <Link to="/">
+                            <Button variant="ghost" className="w-full justify-start gap-2">
+                                <LogOut className="h-4 w-4" /> Logout
+                            </Button>
+                        </Link>
                     </div>
                 </aside>
                 <main className="flex-1 p-6 sm:p-8">
@@ -160,12 +192,13 @@ const DoctorSchedulePage = () => {
                         </div>
                         <div>
                             <Card>
-                                <CardContent className="p-0">
+                                <CardContent className="p-4">
                                     <Calendar
                                         mode="single"
                                         selected={date}
                                         onSelect={setDate}
                                         className="rounded-md"
+                                        disabled={(date) => false}
                                     />
                                 </CardContent>
                             </Card>
@@ -177,11 +210,13 @@ const DoctorSchedulePage = () => {
     );
 };
 
-const AddAppointmentForm = ({ addAppointment }: { addAppointment: (data: any) => void }) => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+const AddAppointmentForm = ({ addAppointment }: { addAppointment: (data: z.infer<typeof appointmentSchema>) => void }) => {
+    const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<z.infer<typeof appointmentSchema>>({
         resolver: zodResolver(appointmentSchema),
         defaultValues: { status: "Confirmed" }
     });
+
+    const status = watch("status");
 
     const onSubmit = (data: any) => {
         addAppointment(data);
@@ -238,7 +273,7 @@ const AddAppointmentForm = ({ addAppointment }: { addAppointment: (data: any) =>
                         Status
                     </Label>
                     <div className="col-span-3">
-                        <Select onValueChange={(value) => register("status").onChange({ target: { value } })} defaultValue="Confirmed">
+                        <Select value={status} onValueChange={(value) => setValue("status", value as any)}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select status" />
                             </SelectTrigger>
@@ -257,7 +292,7 @@ const AddAppointmentForm = ({ addAppointment }: { addAppointment: (data: any) =>
             </form>
         </DialogContent>
     );
-}
+};
 
 const AppointmentList = ({ appointments }: { appointments: any[] }) => (
     <div className="space-y-4 pt-4">
@@ -274,12 +309,12 @@ const AppointmentList = ({ appointments }: { appointments: any[] }) => (
                 </div>
                 <Badge
                     className={`px-2 py-1 text-xs font-medium rounded-full ${appointment.status === "Completed"
-                            ? "bg-green-100 text-green-800"
-                            : appointment.status === "Confirmed"
-                                ? "bg-blue-100 text-blue-800"
-                                : appointment.status === "Cancelled"
-                                    ? "bg-red-100 text-red-800"
-                                    : "bg-yellow-100 text-yellow-800"
+                        ? "bg-green-100 text-green-800"
+                        : appointment.status === "Confirmed"
+                            ? "bg-blue-100 text-blue-800"
+                            : appointment.status === "Cancelled"
+                                ? "bg-red-100 text-red-800"
+                                : "bg-yellow-100 text-yellow-800"
                         }`}
                 >
                     {appointment.status}
