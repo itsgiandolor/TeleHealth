@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Check, Clock, PlusCircle, LayoutDashboard, Users, MessageSquare, LogOut, Stethoscope, Video, FileText } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageSelector } from "@/components/LanguageSelector";
 import {
     Dialog,
     DialogContent,
@@ -114,10 +113,7 @@ const DoctorSchedulePage = () => {
                             <Stethoscope className="h-6 w-6 text-primary" />
                             <span>Telemedicine</span>
                         </Link>
-                        <div className="flex gap-2">
-                            <LanguageSelector />
-                            <ThemeToggle />
-                        </div>
+                        <ThemeToggle />
                     </div>
                     <nav className="flex-1 space-y-2 p-4">
                         <Link to="/dashboard/doctor">

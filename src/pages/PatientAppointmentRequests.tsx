@@ -7,6 +7,7 @@ import { Calendar, Video, FileText, MessageSquare, LogOut, LayoutDashboard, User
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 import {
     Dialog,
     DialogContent,
@@ -68,6 +69,7 @@ const initialRequests: AppointmentRequest[] = [
 ];
 
 const PatientAppointmentRequests = () => {
+    const { t } = useTranslation();
     const [requests, setRequests] = useState<AppointmentRequest[]>(initialRequests);
     const [isRescheduleOpen, setIsRescheduleOpen] = useState(false);
     const [selectedRequest, setSelectedRequest] = useState<AppointmentRequest | null>(null);
@@ -134,14 +136,14 @@ const PatientAppointmentRequests = () => {
                                     : "destructive"
                         }
                     >
-                        {request.status.charAt(0).toUpperCase() + request.status.slice(1)}
+                        {t(`patient.status.${request.status}`)}
                     </Badge>
                 </div>
             </CardHeader>
             <CardContent className="space-y-3">
                 <div className="flex items-center justify-between">
                     <div>
-                        <p className="text-sm font-medium">Proposed Date & Time</p>
+                        <p className="text-sm font-medium">{t('patient.proposedDateTime')}</p>
                         <p className="text-sm text-muted-foreground">
                             {new Date(request.proposedDate).toLocaleDateString('en-US', {
                                 weekday: 'long',
@@ -152,11 +154,11 @@ const PatientAppointmentRequests = () => {
                         </p>
                     </div>
                     <Badge variant={request.appointmentType === "online" ? "default" : "secondary"}>
-                        {request.appointmentType.charAt(0).toUpperCase() + request.appointmentType.slice(1)}
+                        {t(`patient.appointmentType.${request.appointmentType}`)}
                     </Badge>
                 </div>
                 <div>
-                    <p className="text-sm font-medium">Reason for Visit</p>
+                    <p className="text-sm font-medium">{t('patient.reasonForVisit')}</p>
                     <p className="text-sm text-muted-foreground">{request.reason}</p>
                 </div>
                 {request.status === "pending" && (
@@ -166,7 +168,7 @@ const PatientAppointmentRequests = () => {
                             className="flex-1 gap-2"
                             onClick={() => handleApprove(request.id)}
                         >
-                            <Check className="h-4 w-4" /> Approve
+                            <Check className="h-4 w-4" /> {t('patient.approve')}
                         </Button>
                         <Button
                             size="sm"
@@ -174,7 +176,7 @@ const PatientAppointmentRequests = () => {
                             className="flex-1 gap-2"
                             onClick={() => handleReschedule(request)}
                         >
-                            <Calendar className="h-4 w-4" /> Reschedule
+                            <Calendar className="h-4 w-4" /> {t('patient.reschedule')}
                         </Button>
                         <Button
                             size="sm"
@@ -182,13 +184,13 @@ const PatientAppointmentRequests = () => {
                             className="flex-1 gap-2"
                             onClick={() => handleReject(request.id)}
                         >
-                            <X className="h-4 w-4" /> Reject
+                            <X className="h-4 w-4" /> {t('patient.reject')}
                         </Button>
                     </div>
                 )}
                 {request.status === "approved" && (
                     <Button variant="outline" className="w-full gap-2" disabled>
-                        <Video className="h-4 w-4" /> Join Call on Appointment Date
+                        <Video className="h-4 w-4" /> {t('patient.joinCallAppointment')}
                     </Button>
                 )}
             </CardContent>
@@ -197,11 +199,11 @@ const PatientAppointmentRequests = () => {
 
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
-            <aside className="hidden w-64 flex-col border-r bg-background sm:flex">
+            <aside className="hidden w-80 flex-col border-r bg-background sm:flex">
                 <div className="flex h-16 items-center justify-between border-b px-6">
                     <Link to="/" className="flex items-center gap-2 font-semibold">
                         <Stethoscope className="h-6 w-6 text-primary" />
-                        <span>Telemedicine</span>
+                        <span>{t('common.telemedicine')}</span>
                     </Link>
                     <div className="flex gap-2">
                         <LanguageSelector />
@@ -211,41 +213,41 @@ const PatientAppointmentRequests = () => {
                 <nav className="flex-1 space-y-2 p-4">
                     <Link to="/dashboard/patient">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <LayoutDashboard className="h-4 w-4" /> Dashboard
+                            <LayoutDashboard className="h-4 w-4" /> {t('navigation.dashboard')}
                         </Button>
                     </Link>
                     <div className="space-y-1">
                         <Link to="/patient/appointments">
                             <Button variant="ghost" className="w-full justify-start gap-2">
-                                <Calendar className="h-4 w-4" /> Appointments
+                                <Calendar className="h-4 w-4" /> {t('navigation.appointments')}
                             </Button>
                         </Link>
                         <Link to="/patient/appointment-requests">
                             <Button variant="secondary" className="w-full justify-start gap-2 pl-8">
-                                <Calendar className="h-4 w-4" /> Appointment Requests
+                                <Calendar className="h-4 w-4" /> {t('navigation.appointmentRequests')}
                             </Button>
                         </Link>
                     </div>
                     <Link to="/patient/records">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <FileText className="h-4 w-4" /> Medical Records
+                            <FileText className="h-4 w-4" /> {t('navigation.medicalRecords')}
                         </Button>
                     </Link>
                     <Link to="/patient/messages">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <MessageSquare className="h-4 w-4" /> Messages
+                            <MessageSquare className="h-4 w-4" /> {t('navigation.messages')}
                         </Button>
                     </Link>
                     <Link to="/patient/profile">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <User className="h-4 w-4" /> Profile
+                            <User className="h-4 w-4" /> {t('navigation.profile')}
                         </Button>
                     </Link>
                 </nav>
                 <div className="mt-auto p-4">
                     <Link to="/">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <LogOut className="h-4 w-4" /> Logout
+                            <LogOut className="h-4 w-4" /> {t('common.logout')}
                         </Button>
                     </Link>
                 </div>
@@ -253,15 +255,15 @@ const PatientAppointmentRequests = () => {
 
             <main className="flex-1 p-6 sm:p-8">
                 <header className="mb-8">
-                    <h1 className="text-3xl font-bold">Appointment Requests</h1>
-                    <p className="text-muted-foreground">Manage appointment requests from your doctors.</p>
+                    <h1 className="text-3xl font-bold">{t('navigation.appointmentRequests')}</h1>
+                    <p className="text-muted-foreground">{t('patient.manageRequests')}</p>
                 </header>
 
                 <div className="space-y-8">
                     {/* Pending Requests */}
                     <div>
                         <div className="mb-4 flex items-center gap-2">
-                            <h2 className="text-2xl font-semibold">Pending Requests</h2>
+                            <h2 className="text-2xl font-semibold">{t('patient.pendingRequests')}</h2>
                             <Badge variant="outline">{pendingRequests.length}</Badge>
                         </div>
                         {pendingRequests.length > 0 ? (
@@ -273,7 +275,7 @@ const PatientAppointmentRequests = () => {
                         ) : (
                             <Card>
                                 <CardContent className="p-6 text-center">
-                                    <p className="text-muted-foreground">No pending appointment requests</p>
+                                    <p className="text-muted-foreground">{t('patient.noPendingRequests')}</p>
                                 </CardContent>
                             </Card>
                         )}
@@ -283,7 +285,7 @@ const PatientAppointmentRequests = () => {
                     {approvedRequests.length > 0 && (
                         <div>
                             <div className="mb-4 flex items-center gap-2">
-                                <h2 className="text-2xl font-semibold">Approved Appointments</h2>
+                                <h2 className="text-2xl font-semibold">{t('patient.approvedAppointments')}</h2>
                                 <Badge>{approvedRequests.length}</Badge>
                             </div>
                             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -298,7 +300,7 @@ const PatientAppointmentRequests = () => {
                     {rejectedRequests.length > 0 && (
                         <div>
                             <div className="mb-4 flex items-center gap-2">
-                                <h2 className="text-2xl font-semibold">Rejected Appointments</h2>
+                                <h2 className="text-2xl font-semibold">{t('patient.rejectedAppointments')}</h2>
                                 <Badge variant="destructive">{rejectedRequests.length}</Badge>
                             </div>
                             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -314,14 +316,14 @@ const PatientAppointmentRequests = () => {
                 <Dialog open={isRescheduleOpen} onOpenChange={setIsRescheduleOpen}>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Reschedule Appointment</DialogTitle>
+                            <DialogTitle>{t('patient.rescheduleAppointment')}</DialogTitle>
                             <DialogDescription>
-                                Change the date and time for your appointment with {selectedRequest?.doctorName}.
+                                {t('patient.changeDateTime', { doctorName: selectedRequest?.doctorName })}
                             </DialogDescription>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
                             <div className="grid gap-2">
-                                <Label htmlFor="new-date">New Date</Label>
+                                <Label htmlFor="new-date">{t('patient.newDate')}</Label>
                                 <Input
                                     id="new-date"
                                     type="date"
@@ -330,10 +332,10 @@ const PatientAppointmentRequests = () => {
                                 />
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="new-time">New Time</Label>
+                                <Label htmlFor="new-time">{t('patient.newTime')}</Label>
                                 <Select value={newTime} onValueChange={setNewTime}>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select a time" />
+                                        <SelectValue placeholder={t('patient.selectTime')} />
                                     </SelectTrigger>
                                     <SelectContent>
                                         {timeSlots.map((time) => (
@@ -347,10 +349,10 @@ const PatientAppointmentRequests = () => {
                         </div>
                         <DialogFooter>
                             <Button variant="outline" onClick={() => setIsRescheduleOpen(false)}>
-                                Cancel
+                                {t('common.cancel')}
                             </Button>
                             <Button onClick={handleConfirmReschedule}>
-                                Confirm Reschedule
+                                {t('patient.confirmReschedule')}
                             </Button>
                         </DialogFooter>
                     </DialogContent>

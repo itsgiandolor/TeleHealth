@@ -8,7 +8,6 @@ import { Clock, LogOut, LayoutDashboard, Stethoscope, MessageSquare, Send, Searc
 import { Link } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageSelector } from "@/components/LanguageSelector";
 
 interface Message {
     id: string;
@@ -201,10 +200,7 @@ const DoctorMessagesPage = () => {
                         <Stethoscope className="h-6 w-6 text-primary" />
                         <span>Telemedicine</span>
                     </Link>
-                    <div className="flex gap-2">
-                        <LanguageSelector />
-                        <ThemeToggle />
-                    </div>
+                    <ThemeToggle />
                 </div>
                 <nav className="flex-1 space-y-2 p-4">
                     <Link to="/dashboard/doctor">

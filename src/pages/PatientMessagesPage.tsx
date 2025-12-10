@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 interface Message {
     id: string;
@@ -127,6 +128,7 @@ const conversations: Conversation[] = [
 ];
 
 const PatientMessagesPage = () => {
+    const { t } = useTranslation();
     const [selectedConversation, setSelectedConversation] = useState<Conversation>(conversations[0]);
     const [messageInput, setMessageInput] = useState("");
     const [messages, setMessages] = useState<Message[]>(selectedConversation.messages);
@@ -161,11 +163,11 @@ const PatientMessagesPage = () => {
 
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
-            <aside className="hidden w-64 flex-col border-r bg-background sm:flex">
+            <aside className="hidden w-80 flex-col border-r bg-background sm:flex">
                 <div className="flex h-16 items-center justify-between border-b px-6">
                     <Link to="/" className="flex items-center gap-2 font-semibold">
                         <Stethoscope className="h-6 w-6 text-primary" />
-                        <span>Telemedicine</span>
+                        <span>{t('common.telemedicine')}</span>
                     </Link>
                     <div className="flex gap-2">
                         <LanguageSelector />
@@ -175,41 +177,41 @@ const PatientMessagesPage = () => {
                 <nav className="flex-1 space-y-2 p-4">
                     <Link to="/dashboard/patient">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <LayoutDashboard className="h-4 w-4" /> Dashboard
+                            <LayoutDashboard className="h-4 w-4" /> {t('navigation.dashboard')}
                         </Button>
                     </Link>
                     <div className="space-y-1">
                         <Link to="/patient/appointments">
                             <Button variant="ghost" className="w-full justify-start gap-2">
-                                <Calendar className="h-4 w-4" /> Appointments
+                                <Calendar className="h-4 w-4" /> {t('navigation.appointments')}
                             </Button>
                         </Link>
                         <Link to="/patient/appointment-requests">
                             <Button variant="ghost" className="w-full justify-start gap-2 pl-8">
-                                <Calendar className="h-4 w-4" /> Appointment Requests
+                                <Calendar className="h-4 w-4" /> {t('navigation.appointmentRequests')}
                             </Button>
                         </Link>
                     </div>
                     <Link to="/patient/records">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <FileText className="h-4 w-4" /> Medical Records
+                            <FileText className="h-4 w-4" /> {t('navigation.medicalRecords')}
                         </Button>
                     </Link>
                     <Link to="/patient/messages">
                         <Button variant="secondary" className="w-full justify-start gap-2">
-                            <MessageSquare className="h-4 w-4" /> Messages
+                            <MessageSquare className="h-4 w-4" /> {t('navigation.messages')}
                         </Button>
                     </Link>
                     <Link to="/patient/profile">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <User className="h-4 w-4" /> Profile
+                            <User className="h-4 w-4" /> {t('navigation.profile')}
                         </Button>
                     </Link>
                 </nav>
                 <div className="mt-auto p-4">
                     <Link to="/">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <LogOut className="h-4 w-4" /> Logout
+                            <LogOut className="h-4 w-4" /> {t('common.logout')}
                         </Button>
                     </Link>
                 </div>
@@ -217,22 +219,22 @@ const PatientMessagesPage = () => {
 
             <main className="flex-1 p-6 sm:p-8">
                 <header className="mb-8">
-                    <h1 className="text-3xl font-bold">Messages</h1>
-                    <p className="text-muted-foreground">Communicate with your healthcare providers.</p>
+                    <h1 className="text-3xl font-bold">{t('navigation.messages')}</h1>
+                    <p className="text-muted-foreground">{t('patient.communicateWithDoctors')}</p>
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[calc(100vh-200px)]">
                     {/* Conversations List */}
                     <Card className="md:col-span-1 flex flex-col">
                         <CardHeader className="pb-3">
-                            <CardTitle className="text-lg">Conversations</CardTitle>
+                            <CardTitle className="text-lg">{t('patient.conversations')}</CardTitle>
                         </CardHeader>
                         <CardContent className="flex-1 p-0 px-6">
                             <div className="mb-4">
                                 <div className="relative">
                                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                                     <Input
-                                        placeholder="Search conversations..."
+                                        placeholder={t('patient.searchConversations')}
                                         className="pl-10"
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -321,7 +323,7 @@ const PatientMessagesPage = () => {
                         <div className="border-t p-4">
                             <div className="flex gap-2">
                                 <Input
-                                    placeholder="Type your message..."
+                                    placeholder={t('patient.typeMessage')}
                                     value={messageInput}
                                     onChange={(e) => setMessageInput(e.target.value)}
                                     onKeyPress={(e) => {

@@ -8,8 +8,10 @@ import { Calendar, FileText, LogOut, LayoutDashboard, User, Stethoscope, Message
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 const PatientProfilePage = () => {
+    const { t } = useTranslation();
     const patient = {
         name: "Giannis Antetokounmpo",
         email: "gian.antetokounmpo@example.com",
@@ -25,11 +27,11 @@ const PatientProfilePage = () => {
 
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
-            <aside className="hidden w-64 flex-col border-r bg-background sm:flex">
+            <aside className="hidden w-80 flex-col border-r bg-background sm:flex">
                 <div className="flex h-16 items-center justify-between border-b px-6">
                     <Link to="/" className="flex items-center gap-2 font-semibold">
                         <Stethoscope className="h-6 w-6 text-primary" />
-                        <span>Telemedicine</span>
+                        <span>{t('common.telemedicine')}</span>
                     </Link>
                     <div className="flex gap-2">
                         <LanguageSelector />
@@ -39,41 +41,41 @@ const PatientProfilePage = () => {
                 <nav className="flex-1 space-y-2 p-4">
                     <Link to="/dashboard/patient">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <LayoutDashboard className="h-4 w-4" /> Dashboard
+                            <LayoutDashboard className="h-4 w-4" /> {t('navigation.dashboard')}
                         </Button>
                     </Link>
                     <div className="space-y-1">
                         <Link to="/patient/appointments">
                             <Button variant="ghost" className="w-full justify-start gap-2">
-                                <Calendar className="h-4 w-4" /> Appointments
+                                <Calendar className="h-4 w-4" /> {t('navigation.appointments')}
                             </Button>
                         </Link>
                         <Link to="/patient/appointment-requests">
                             <Button variant="ghost" className="w-full justify-start gap-2 pl-8">
-                                <Calendar className="h-4 w-4" /> Appointment Requests
+                                <Calendar className="h-4 w-4" /> {t('navigation.appointmentRequests')}
                             </Button>
                         </Link>
                     </div>
                     <Link to="/patient/records">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <FileText className="h-4 w-4" /> Medical Records
+                            <FileText className="h-4 w-4" /> {t('navigation.medicalRecords')}
                         </Button>
                     </Link>
                     <Link to="/patient/messages">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <MessageSquare className="h-4 w-4" /> Messages
+                            <MessageSquare className="h-4 w-4" /> {t('navigation.messages')}
                         </Button>
                     </Link>
                     <Link to="/patient/profile">
                         <Button variant="secondary" className="w-full justify-start gap-2">
-                            <User className="h-4 w-4" /> Profile
+                            <User className="h-4 w-4" /> {t('navigation.profile')}
                         </Button>
                     </Link>
                 </nav>
                 <div className="mt-auto p-4">
                     <Link to="/">
                         <Button variant="ghost" className="w-full justify-start gap-2">
-                            <LogOut className="h-4 w-4" /> Logout
+                            <LogOut className="h-4 w-4" /> {t('common.logout')}
                         </Button>
                     </Link>
                 </div>
@@ -81,8 +83,8 @@ const PatientProfilePage = () => {
 
             <main className="flex-1 p-6 sm:p-8">
                 <header className="mb-8">
-                    <h1 className="text-3xl font-bold">My Profile</h1>
-                    <p className="text-muted-foreground">View and manage your personal information.</p>
+                    <h1 className="text-3xl font-bold">{t('navigation.profile')}</h1>
+                    <p className="text-muted-foreground">{t('patient.manageProfile')}</p>
                 </header>
 
                 <div className="grid gap-8 md:grid-cols-3">
@@ -97,7 +99,7 @@ const PatientProfilePage = () => {
                                 <CardDescription>{patient.email}</CardDescription>
                             </CardHeader>
                             <CardContent className="text-center">
-                                <Button>Change Photo</Button>
+                                <Button>{t('patient.changePhoto')}</Button>
                             </CardContent>
                         </Card>
                     </div>
@@ -105,48 +107,48 @@ const PatientProfilePage = () => {
                     <div className="md:col-span-2">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Personal Information</CardTitle>
-                                <CardDescription>Update your contact and personal details.</CardDescription>
+                                <CardTitle>{t('patient.personalInformation')}</CardTitle>
+                                <CardDescription>{t('patient.updateContactDetails')}</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-6">
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <div className="space-y-2">
-                                        <Label htmlFor="fullName">Full Name</Label>
+                                        <Label htmlFor="fullName">{t('patient.fullName')}</Label>
                                         <Input id="fullName" defaultValue={patient.name} />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="email">Email Address</Label>
+                                        <Label htmlFor="email">{t('patient.emailAddress')}</Label>
                                         <Input id="email" type="email" defaultValue={patient.email} />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="phone">Phone Number</Label>
+                                        <Label htmlFor="phone">{t('patient.phoneNumber')}</Label>
                                         <Input id="phone" type="tel" defaultValue={patient.phone} />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="dob">Date of Birth</Label>
+                                        <Label htmlFor="dob">{t('patient.dateOfBirth')}</Label>
                                         <Input id="dob" type="date" defaultValue={patient.dob} />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="address">Address</Label>
+                                    <Label htmlFor="address">{t('patient.address')}</Label>
                                     <Input id="address" defaultValue={patient.address} />
                                 </div>
 
                                 <Separator />
 
-                                <h3 className="text-lg font-medium">Emergency Contact</h3>
+                                <h3 className="text-lg font-medium">{t('patient.emergencyContact')}</h3>
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <div className="space-y-2">
-                                        <Label htmlFor="emergencyName">Contact Name</Label>
+                                        <Label htmlFor="emergencyName">{t('patient.contactName')}</Label>
                                         <Input id="emergencyName" defaultValue={patient.emergencyContact.name} />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="emergencyPhone">Contact Phone</Label>
+                                        <Label htmlFor="emergencyPhone">{t('patient.contactPhone')}</Label>
                                         <Input id="emergencyPhone" type="tel" defaultValue={patient.emergencyContact.phone} />
                                     </div>
                                 </div>
                                 <div className="flex justify-end">
-                                    <Button>Save Changes</Button>
+                                    <Button>{t('common.save')}</Button>
                                 </div>
                             </CardContent>
                         </Card>

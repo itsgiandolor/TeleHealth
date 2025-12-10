@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, LogOut, LayoutDashboard, Stethoscope, MessageSquare, Users, Check, X, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageSelector } from "@/components/LanguageSelector";
 import {
     Dialog,
     DialogContent,
@@ -209,10 +208,7 @@ const DoctorAppointmentRequests = () => {
                         <Stethoscope className="h-6 w-6 text-primary" />
                         <span>Telemedicine</span>
                     </Link>
-                    <div className="flex gap-2">
-                        <LanguageSelector />
-                        <ThemeToggle />
-                    </div>
+                    <ThemeToggle />
                 </div>
                 <nav className="flex-1 space-y-2 p-4">
                     <Link to="/dashboard/doctor">
