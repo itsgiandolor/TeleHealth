@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, FileText, LogOut, LayoutDashboard, User, Stethoscope, MessageSquare, Send, Search } from "lucide-react";
+import { Calendar, FileText, LogOut, LayoutDashboard, User, Stethoscope, MessageSquare, Send, Search, Video } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -287,6 +287,9 @@ const PatientMessagesPage = () => {
                                         <p className="text-sm text-muted-foreground">{selectedConversation.specialty}</p>
                                     </div>
                                 </div>
+                                <Button size="icon" className="rounded-full">
+                                    <Video className="h-5 w-5" />
+                                </Button>
                             </div>
                         </CardHeader>
 

@@ -2,8 +2,8 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
-import { Check, Clock, PlusCircle, LayoutDashboard, Users, MessageSquare, LogOut, Stethoscope, Video, FileText } from "lucide-react";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Check, Clock, PlusCircle, LayoutDashboard, Users, MessageSquare, LogOut, Stethoscope, Video, FileText, Calendar } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
     Dialog,
@@ -195,7 +195,7 @@ const DoctorSchedulePage = () => {
                         <div>
                             <Card>
                                 <CardContent className="p-4">
-                                    <Calendar
+                                    <CalendarComponent
                                         mode="single"
                                         selected={date}
                                         onSelect={setDate}
