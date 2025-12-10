@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Calendar, Video, FileText, MessageSquare, LogOut, LayoutDashboard, Users, Stethoscope } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const DoctorDashboard = () => {
     const todayAppointments = [
@@ -22,11 +23,12 @@ const DoctorDashboard = () => {
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
             <aside className="hidden w-64 flex-col border-r bg-background sm:flex">
-                <div className="flex h-16 items-center border-b px-6">
+                <div className="flex h-16 items-center justify-between border-b px-6">
                     <Link to="/" className="flex items-center gap-2 font-semibold">
                         <Stethoscope className="h-6 w-6 text-primary" />
                         <span>Telemedicine</span>
                     </Link>
+                    <ThemeToggle />
                 </div>
                 <nav className="flex-1 space-y-2 p-4">
                     <Link to="/dashboard/doctor">
@@ -81,7 +83,7 @@ const DoctorDashboard = () => {
                 <div className="grid gap-8">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Today's Schedule</CardTitle>
+                            <CardTitle>Today's Appointments</CardTitle>
                             <CardDescription>Your appointments for today.</CardDescription>
                         </CardHeader>
                         <CardContent>
