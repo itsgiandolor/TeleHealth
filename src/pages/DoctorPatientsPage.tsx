@@ -4,10 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Clock, Users, MessageSquare, LogOut, LayoutDashboard, Stethoscope, Search, FilePlus, Calendar } from "lucide-react";
+import { Clock, Users, MessageSquare, LogOut, LayoutDashboard, Stethoscope, Search, FilePlus, Calendar, Eye } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
 
 const patients = [
     {
@@ -17,6 +24,11 @@ const patients = [
         lastVisit: "2024-07-10",
         diagnosis: "Hypertension",
         status: "Stable",
+        age: "30 years old",
+        email: "gian@example.com",
+        phone: "+1 (123) 456-7890",
+        address: "123 Victory Lane, Milwaukee, WI",
+        notes: "Patient is responding well to treatment. Blood pressure readings stable at 130/85. Continue current medication regimen. Schedule follow-up in 3 months.",
     },
     {
         id: "P002",
@@ -25,6 +37,11 @@ const patients = [
         lastVisit: "2024-07-08",
         diagnosis: "Diabetes Type 2",
         status: "Monitoring",
+        age: "45 years old",
+        email: "maria@example.com",
+        phone: "+1 (234) 567-8901",
+        address: "456 Oak Street, Chicago, IL",
+        notes: "Fasting glucose levels have improved with diet modifications. Continue monitoring blood sugar. Next lab work in 2 months. Discuss exercise regimen.",
     },
     {
         id: "P003",
@@ -33,6 +50,11 @@ const patients = [
         lastVisit: "2024-07-05",
         diagnosis: "Common Cold",
         status: "Recovered",
+        age: "28 years old",
+        email: "john@example.com",
+        phone: "+1 (345) 678-9012",
+        address: "789 Pine Avenue, Boston, MA",
+        notes: "Patient has recovered completely. No further treatment needed. Advised on preventive measures for future viral infections.",
     },
     {
         id: "P004",
@@ -41,6 +63,11 @@ const patients = [
         lastVisit: "2024-07-11",
         diagnosis: "Allergic Rhinitis",
         status: "Stable",
+        age: "35 years old",
+        email: "alex@example.com",
+        phone: "+1 (456) 789-0123",
+        address: "321 Elm Street, New York, NY",
+        notes: "Symptoms well-controlled with antihistamines. Continue current allergy management plan. Consider allergy testing for specific triggers.",
     },
     {
         id: "P005",
@@ -49,15 +76,27 @@ const patients = [
         lastVisit: "2024-07-09",
         diagnosis: "Migraine",
         status: "Monitoring",
+        age: "42 years old",
+        email: "samantha@example.com",
+        phone: "+1 (567) 890-1234",
+        address: "654 Maple Drive, Los Angeles, CA",
+        notes: "Frequency of migraines has decreased with prophylactic therapy. Continue preventive medication. Lifestyle modifications showing positive results.",
     }
 ];
 
 const DoctorPatientsPage = () => {
     const [searchTerm, setSearchTerm] = React.useState("");
+    const [isDetailsOpen, setIsDetailsOpen] = React.useState(false);
+    const [selectedPatient, setSelectedPatient] = React.useState<any>(null);
 
     const filteredPatients = patients.filter(p =>
         p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const handleViewDetails = (patient: any) => {
+        setSelectedPatient(patient);
+        setIsDetailsOpen(true);
+    };
 
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
@@ -165,7 +204,14 @@ const DoctorPatientsPage = () => {
                                             }>{patient.status}</Badge>
                                         </TableCell>
                                         <TableCell className="text-right">
-                                            <Button variant="outline" size="sm">View Details</Button>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                className="gap-2"
+                                                onClick={() => handleViewDetails(patient)}
+                                            >
+                                                <Eye className="h-4 w-4" /> View Details
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -174,6 +220,83 @@ const DoctorPatientsPage = () => {
                     </CardContent>
                 </Card>
             </main>
+
+            <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
+                <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                        <DialogTitle>Patient Details</DialogTitle>
+                        <DialogDescription>
+                            Complete patient information
+                        </DialogDescription>
+                    </DialogHeader>
+                    {selectedPatient && (
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-4 pb-4 border-b">
+                                <Avatar className="h-16 w-16">
+                                    <AvatarImage src={selectedPatient.avatar} />
+                                    <AvatarFallback>{selectedPatient.name.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <h2 className="text-2xl font-bold">{selectedPatient.name}</h2>
+                                    <p className="text-muted-foreground">ID: {selectedPatient.id}</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground">Age</p>
+                                    <p className="text-base font-semibold">{selectedPatient.age}</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground">Last Visit</p>
+                                    <p className="text-base font-semibold">{selectedPatient.lastVisit}</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground">Email</p>
+                                    <p className="text-base font-semibold">{selectedPatient.email}</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground">Phone</p>
+                                    <p className="text-base font-semibold">{selectedPatient.phone}</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p className="text-sm font-medium text-muted-foreground">Address</p>
+                                <p className="text-base">{selectedPatient.address}</p>
+                            </div>
+
+                            <div className="border-t pt-4">
+                                <p className="text-sm font-medium text-muted-foreground mb-2">Medical Information</p>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p className="text-xs text-muted-foreground">Diagnosis</p>
+                                        <p className="font-semibold">{selectedPatient.diagnosis}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-muted-foreground">Status</p>
+                                        <Badge variant={
+                                            selectedPatient.status === 'Recovered' ? 'outline' :
+                                                selectedPatient.status === 'Stable' ? 'default' :
+                                                    'secondary'
+                                        }>{selectedPatient.status}</Badge>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="border-t pt-4">
+                                <p className="text-sm font-medium text-muted-foreground mb-2">Doctor's Notes</p>
+                                <p className="text-sm whitespace-pre-wrap">{selectedPatient.notes}</p>
+                            </div>
+
+                            <div className="flex gap-2 justify-end pt-4">
+                                <Button variant="outline" onClick={() => setIsDetailsOpen(false)}>Close</Button>
+                                <Button>Edit Patient Record</Button>
+                            </div>
+                        </div>
+                    )}
+                </DialogContent>
+            </Dialog>
         </div>
     );
 };

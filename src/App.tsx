@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound";
 import RoleSelection from "./pages/RoleSelection";
 import PatientDashboard from "./pages/PatientDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import DoctorSchedulePage from "./pages/DoctorSchedulePage";
 import DoctorPatientsPage from "./pages/DoctorPatientsPage";
 import PatientAppointmentsPage from "./pages/PatientAppointmentsPage";
@@ -34,6 +35,8 @@ function App() {
           <Route path="/doctor/patients" element={<DoctorPatientsPage />} />
           <Route path="/doctor/messages" element={<DoctorMessagesPage />} />
           <Route path="/doctor/appointments" element={<DoctorAppointmentRequests />} />
+
+          <Route path="/dashboard/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

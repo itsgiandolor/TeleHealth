@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Calendar, Video, FileText, MessageSquare, LogOut, LayoutDashboard, User, Stethoscope } from "lucide-react";
+import { Calendar, Video, FileText, MessageSquare, LogOut, LayoutDashboard, User, Stethoscope, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
@@ -55,6 +55,8 @@ const PatientDashboard = () => {
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedType, setSelectedType] = useState<"online" | "onsite">("online");
     const [reason, setReason] = useState("");
+    const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
+    const [selectedConsultation, setSelectedConsultation] = useState<any>(null);
 
     const handleBookAppointment = () => {
         if (selectedDoctor && selectedDate && selectedTime && reason) {
@@ -73,8 +75,24 @@ const PatientDashboard = () => {
     ];
 
     const pastConsultations = [
-        { doctor: "Dr. Evelyn Reed", date: "2024-07-10", diagnosis: "Hypertension", prescription: "View" },
-        { doctor: "Dr. Ben Carter", date: "2024-06-20", diagnosis: "Common Cold", prescription: "View" },
+        {
+            id: 1,
+            doctor: "Dr. Evelyn Reed",
+            date: "2024-07-10",
+            diagnosis: "Hypertension",
+            prescription: "View",
+            fullDetails: "Patient came in for regular hypertension follow-up. Blood pressure readings have been stable at around 130/85. Current medication (Lisinopril 10mg) is working well. No side effects reported. Patient advised to continue current lifestyle changes and monitor diet. Next follow-up in 3 months.",
+            notes: "Monitor blood pressure regularly. Continue with low-sodium diet."
+        },
+        {
+            id: 2,
+            doctor: "Dr. Ben Carter",
+            date: "2024-06-20",
+            diagnosis: "Common Cold",
+            prescription: "View",
+            fullDetails: "Patient came in with cough, sore throat, and mild fever (99.5°F). Duration of symptoms: 3 days. Physical examination shows mild pharyngeal erythema. Diagnosis: Viral upper respiratory infection. Recommendations: Rest, plenty of fluids, throat lozenges. No antibiotics needed. Symptoms should improve in 7-10 days.",
+            notes: "Over-the-counter cough syrup and throat lozenges recommended. Contact if symptoms worsen."
+        },
     ];
 
     return (
@@ -205,7 +223,17 @@ const PatientDashboard = () => {
                                             <TableCell>{consult.date}</TableCell>
                                             <TableCell>{consult.diagnosis}</TableCell>
                                             <TableCell className="text-right">
-                                                <Button variant="outline" size="sm">{consult.prescription}</Button>
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    className="gap-2"
+                                                    onClick={() => {
+                                                        setSelectedConsultation(consult);
+                                                        setIsConsultationModalOpen(true);
+                                                    }}
+                                                >
+                                                    <Eye className="h-4 w-4" /> {consult.prescription}
+                                                </Button>
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -294,6 +322,47 @@ const PatientDashboard = () => {
                             Book Appointment
                         </Button>
                     </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            <Dialog open={isConsultationModalOpen} onOpenChange={setIsConsultationModalOpen}>
+                <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                        <DialogTitle>Consultation Details</DialogTitle>
+                        <DialogDescription>
+                            Complete information about your consultation
+                        </DialogDescription>
+                    </DialogHeader>
+                    {selectedConsultation && (
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground">Doctor</p>
+                                    <p className="text-base font-semibold">{selectedConsultation.doctor}</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground">Date</p>
+                                    <p className="text-base font-semibold">{selectedConsultation.date}</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-medium text-muted-foreground">Diagnosis</p>
+                                    <p className="text-base font-semibold">{selectedConsultation.diagnosis}</p>
+                                </div>
+                            </div>
+                            <div className="border-t pt-4">
+                                <p className="text-sm font-medium text-muted-foreground mb-2">Consultation Notes</p>
+                                <p className="text-sm whitespace-pre-wrap">{selectedConsultation.fullDetails}</p>
+                            </div>
+                            <div className="border-t pt-4">
+                                <p className="text-sm font-medium text-muted-foreground mb-2">Doctor's Recommendations</p>
+                                <p className="text-sm whitespace-pre-wrap">{selectedConsultation.notes}</p>
+                            </div>
+                            <div className="flex gap-2 justify-end pt-4">
+                                <Button variant="outline" onClick={() => setIsConsultationModalOpen(false)}>Close</Button>
+                                <Button className="gap-2"><FileText className="h-4 w-4" /> Download Report</Button>
+                            </div>
+                        </div>
+                    )}
                 </DialogContent>
             </Dialog>
         </div>

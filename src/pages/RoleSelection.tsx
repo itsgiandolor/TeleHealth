@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { User, Stethoscope } from "lucide-react";
+import { User, Stethoscope, Shield } from "lucide-react";
 
 const RoleSelection = () => {
     return (
@@ -9,7 +9,7 @@ const RoleSelection = () => {
                 <h1 className="mb-12 text-4xl font-semibold tracking-wide text-foreground">
                     Sign in as a...
                 </h1>
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
                     <Link to="/dashboard/patient">
                         <Card className="glass-card transform-gpu cursor-pointer p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:ring-2 hover:ring-primary/50">
                             <CardHeader>
@@ -31,6 +31,17 @@ const RoleSelection = () => {
                             </CardHeader>
                             <CardContent>
                                 <p className="text-muted-foreground">Manage your schedule, conduct consultations, and issue e-prescriptions.</p>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                    <Link to="/dashboard/admin">
+                        <Card className="glass-card transform-gpu cursor-pointer p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:ring-2 hover:ring-purple-500/50">
+                            <CardHeader>
+                                <Shield className="mx-auto h-16 w-16 text-purple-500" />
+                                <CardTitle className="mt-4 text-2xl font-semibold">Admin</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-muted-foreground">Monitor system health, manage users, and oversee the entire platform.</p>
                             </CardContent>
                         </Card>
                     </Link>

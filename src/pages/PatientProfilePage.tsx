@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useTranslation } from "react-i18next";
+import { Textarea } from "@/components/ui/textarea";
 
 const PatientProfilePage = () => {
     const { t } = useTranslation();
@@ -21,6 +22,13 @@ const PatientProfilePage = () => {
         emergencyContact: {
             name: "Mariah Riddlesprigger",
             phone: "+1 (098) 765-4321",
+        },
+        healthBackground: {
+            allergies: "Penicillin, Shellfish",
+            chronicConditions: "Hypertension",
+            pastSurgeries: "Appendectomy (2010)",
+            medications: "Lisinopril 10mg daily",
+            familyHistory: "Father: Diabetes, Mother: Hypertension",
         },
         avatarUrl: "https://i.pravatar.cc/150?u=giannis",
     };
@@ -87,72 +95,116 @@ const PatientProfilePage = () => {
                     <p className="text-muted-foreground">{t('patient.manageProfile')}</p>
                 </header>
 
-                <div className="grid gap-8 md:grid-cols-3">
-                    <div className="md:col-span-1">
-                        <Card>
-                            <CardHeader className="items-center">
-                                <Avatar className="h-24 w-24 mb-4">
-                                    <AvatarImage src={patient.avatarUrl} alt={patient.name} />
-                                    <AvatarFallback>{patient.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                                </Avatar>
-                                <CardTitle className="text-2xl">{patient.name}</CardTitle>
-                                <CardDescription>{patient.email}</CardDescription>
-                            </CardHeader>
-                            <CardContent className="text-center">
-                                <Button>{t('patient.changePhoto')}</Button>
-                            </CardContent>
-                        </Card>
+                <div className="space-y-8">
+                    <div className="grid gap-8 md:grid-cols-3">
+                        <div className="md:col-span-1">
+                            <Card>
+                                <CardHeader className="items-center">
+                                    <Avatar className="h-24 w-24 mb-4">
+                                        <AvatarImage src={patient.avatarUrl} alt={patient.name} />
+                                        <AvatarFallback>{patient.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                    </Avatar>
+                                    <CardTitle className="text-2xl">{patient.name}</CardTitle>
+                                    <CardDescription>{patient.email}</CardDescription>
+                                </CardHeader>
+                                <CardContent className="text-center">
+                                    <Button>{t('patient.changePhoto')}</Button>
+                                </CardContent>
+                            </Card>
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>{t('patient.personalInformation')}</CardTitle>
+                                    <CardDescription>{t('patient.updateContactDetails')}</CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-6">
+                                    <div className="grid gap-4 sm:grid-cols-2">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="fullName">{t('patient.fullName')}</Label>
+                                            <Input id="fullName" defaultValue={patient.name} />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="email">{t('patient.emailAddress')}</Label>
+                                            <Input id="email" type="email" defaultValue={patient.email} />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="phone">{t('patient.phoneNumber')}</Label>
+                                            <Input id="phone" type="tel" defaultValue={patient.phone} />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="dob">{t('patient.dateOfBirth')}</Label>
+                                            <Input id="dob" type="date" defaultValue={patient.dob} />
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="address">{t('patient.address')}</Label>
+                                        <Input id="address" defaultValue={patient.address} />
+                                    </div>
+                                    <div className="flex justify-end">
+                                        <Button>{t('common.save')}</Button>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </div>
 
-                    <div className="md:col-span-2">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>{t('patient.personalInformation')}</CardTitle>
-                                <CardDescription>{t('patient.updateContactDetails')}</CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-6">
-                                <div className="grid gap-4 sm:grid-cols-2">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="fullName">{t('patient.fullName')}</Label>
-                                        <Input id="fullName" defaultValue={patient.name} />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="email">{t('patient.emailAddress')}</Label>
-                                        <Input id="email" type="email" defaultValue={patient.email} />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="phone">{t('patient.phoneNumber')}</Label>
-                                        <Input id="phone" type="tel" defaultValue={patient.phone} />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="dob">{t('patient.dateOfBirth')}</Label>
-                                        <Input id="dob" type="date" defaultValue={patient.dob} />
-                                    </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>{t('patient.emergencyContact')}</CardTitle>
+                            <CardDescription>Emergency contact information</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                            <div className="grid gap-4 sm:grid-cols-2">
+                                <div className="space-y-2">
+                                    <Label htmlFor="emergencyName">{t('patient.contactName')}</Label>
+                                    <Input id="emergencyName" defaultValue={patient.emergencyContact.name} />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="address">{t('patient.address')}</Label>
-                                    <Input id="address" defaultValue={patient.address} />
+                                    <Label htmlFor="emergencyPhone">{t('patient.contactPhone')}</Label>
+                                    <Input id="emergencyPhone" type="tel" defaultValue={patient.emergencyContact.phone} />
                                 </div>
+                            </div>
+                            <div className="flex justify-end">
+                                <Button>{t('common.save')}</Button>
+                            </div>
+                        </CardContent>
+                    </Card>
 
-                                <Separator />
-
-                                <h3 className="text-lg font-medium">{t('patient.emergencyContact')}</h3>
-                                <div className="grid gap-4 sm:grid-cols-2">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="emergencyName">{t('patient.contactName')}</Label>
-                                        <Input id="emergencyName" defaultValue={patient.emergencyContact.name} />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="emergencyPhone">{t('patient.contactPhone')}</Label>
-                                        <Input id="emergencyPhone" type="tel" defaultValue={patient.emergencyContact.phone} />
-                                    </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Health Background</CardTitle>
+                            <CardDescription>Your medical history and health information for screening</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                            <div className="grid gap-4 sm:grid-cols-2">
+                                <div className="space-y-2">
+                                    <Label htmlFor="allergies">Allergies</Label>
+                                    <Input id="allergies" defaultValue={patient.healthBackground.allergies} placeholder="List any allergies (e.g., penicillin, peanuts)" />
                                 </div>
-                                <div className="flex justify-end">
-                                    <Button>{t('common.save')}</Button>
+                                <div className="space-y-2">
+                                    <Label htmlFor="chronicConditions">Chronic Conditions</Label>
+                                    <Input id="chronicConditions" defaultValue={patient.healthBackground.chronicConditions} placeholder="e.g., Diabetes, Hypertension" />
                                 </div>
-                            </CardContent>
-                        </Card>
-                    </div>
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="pastSurgeries">Past Surgeries</Label>
+                                <Textarea id="pastSurgeries" defaultValue={patient.healthBackground.pastSurgeries} placeholder="List any surgeries with dates" />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="medications">Current Medications</Label>
+                                <Textarea id="medications" defaultValue={patient.healthBackground.medications} placeholder="List all current medications and dosages" />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="familyHistory">Family Medical History</Label>
+                                <Textarea id="familyHistory" defaultValue={patient.healthBackground.familyHistory} placeholder="Significant family medical history" />
+                            </div>
+                            <div className="flex justify-end">
+                                <Button>{t('common.save')}</Button>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
             </main>
         </div>
